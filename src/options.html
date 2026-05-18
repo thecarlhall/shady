@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Shady — options</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Shady</h1>
+      <p class="lede">Shade non-working hours in Google Calendar.</p>
+
+      <section>
+        <h2>Color</h2>
+        <div class="row">
+          <label for="color">Shade color</label>
+          <input id="color" type="color" />
+        </div>
+        <div class="row">
+          <label for="opacity">Opacity</label>
+          <input id="opacity" type="range" min="0.05" max="0.8" step="0.05" />
+          <span id="opacity-value" class="muted"></span>
+        </div>
+        <div class="preview-row">
+          <span>Preview</span>
+          <div id="preview" class="preview"></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Working hours</h2>
+        <p class="muted">Unchecked days are shaded all day.</p>
+        <table id="days">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Working</th>
+              <th>Start</th>
+              <th>End</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <div class="actions">
+        <button id="save" type="button">Save</button>
+        <span id="toast" class="toast" aria-live="polite"></span>
+      </div>
+    </main>
+    <script src="storage.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

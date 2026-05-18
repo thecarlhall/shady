@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Shady",
+  "version": "0.1.0",
+  "description": "Shade your non-working hours in Google Calendar with a color of your choice.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://calendar.google.com/*"],
+      "js": ["src/storage.js", "src/content.js"],
+      "css": ["src/content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "src/options.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "Shady — options"
+  }
+}

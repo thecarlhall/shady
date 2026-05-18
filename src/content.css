@@ -1,0 +1,9 @@
+/* Shady overlays — positioned by content.js. The element is position:fixed
+   and inline-sized, so this stylesheet only handles paint, pointer-events,
+   and stacking. */
+
+.shady-overlay {
+  background-color: var(--shady-color, rgba(0, 0, 0, 0.15));
+  pointer-events: none;
+  z-index: 1;
+}
