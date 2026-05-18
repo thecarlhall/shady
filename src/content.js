@@ -115,11 +115,11 @@ function shadyMain() {
   }
 
   function dayKeyFor(col) {
-    // data-datekey is days since GCal's epoch (1899-12-30, a Saturday).
-    // Only the modulo-7 offset matters here.
+    // Empirically: data-datekey mod 7 == 0 is Friday. The +5 offset rotates
+    // that to index 5 ("fri") in SHADY.DAY_KEYS (sun=0 .. sat=6).
     const key = parseInt(col.getAttribute("data-datekey"), 10);
     if (!Number.isFinite(key)) return null;
-    return SHADY.DAY_KEYS[(key + 6) % 7];
+    return SHADY.DAY_KEYS[(key + 5) % 7];
   }
 
   function measureHours(sampleColumn) {
