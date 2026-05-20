@@ -80,6 +80,7 @@ function shadyMain() {
   function refresh() {
     clearOverlays();
     if (!settings) return;
+    if (!isHourGridView()) return;
 
     const columns = findDayColumns();
     if (columns.length === 0) return;
@@ -103,6 +104,17 @@ function shadyMain() {
   function clearOverlays() {
     for (const node of overlays) node.remove();
     overlays.length = 0;
+  }
+
+  function isHourGridView() {
+    // GCal view name is the last path segment: /r/day, /r/week, /r/month,
+    // /r/year, /r/agenda (or /r/schedule), /r/customday, /r/customweek.
+    // Only the hourly-grid views render meaningful non-working ranges.
+    const m = location.pathname.match(/\/r\/([^/?#]+)/);
+    if (!m) return true;
+    const view = m[1].toLowerCase();
+    return view !== "month" && view !== "year" &&
+      view !== "agenda" && view !== "schedule";
   }
 
   function findDayColumns() {
