@@ -127,11 +127,13 @@ function shadyMain() {
   }
 
   function dayKeyFor(col) {
-    // Empirically: data-datekey mod 7 == 0 is Friday. The +5 offset rotates
-    // that to index 5 ("fri") in SHADY.DAY_KEYS (sun=0 .. sat=6).
-    const key = parseInt(col.getAttribute("data-datekey"), 10);
-    if (!Number.isFinite(key)) return null;
-    return SHADY.DAY_KEYS[(key + 5) % 7];
+    // GCal puts the weekday in an <h2> inside each day column
+    // (e.g. "18 events, Monday, May 18"). data-datekey is a packed encoding
+    // (~32 slots per month) that drifts ~1 day per month, so read the name.
+    const h2 = col.querySelector("h2");
+    if (!h2) return null;
+    const m = h2.textContent.match(/\b(Sun|Mon|Tues|Wednes|Thurs|Fri|Satur)day\b/);
+    return m ? m[0].slice(0, 3).toLowerCase() : null;
   }
 
   function measureHours(sampleColumn) {
